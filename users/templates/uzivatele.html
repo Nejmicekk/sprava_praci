@@ -10,7 +10,7 @@ Uživatelé
 {% endblock %}
 
 {%block content%}
-    {%if request.user.is_authenticated and request.user.role == "admin"%}
+    {%if request.user.role == "admin"%}
         <table>
             <tr>
                 <th>

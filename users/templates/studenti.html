@@ -10,7 +10,7 @@ Studenti
 {% endblock %}
 
 {%block content%}
-    {%if request.user.is_authenticated and request.user.role == "ucitel" or request.user.role == "admin"%}
+    {%if request.user.role == "ucitel" or request.user.role == "admin"%}
     <table>
         <tr>
             <th>

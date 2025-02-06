@@ -47,8 +47,6 @@ def edit_event(request, event_id):
 
     return render(request, 'events/edit_event.html', {'form': form, 'event': event})
 
-
-
 def delete_event(request, event_id):
     event = Event.objects.get(id=event_id)  # Načteme událost
     if request.method == "POST":
@@ -56,21 +54,3 @@ def delete_event(request, event_id):
         return redirect('event_list')  # Přesměrování po smazání
 
     return render(request, 'events/delete_event.html', {'event': event})
-
-
-def register(request):
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)  # Automaticky přihlásíme uživatele
-            return redirect('event_list')
-    else:
-        form = RegisterForm()
-
-    return render(request, 'events/register.html', {'form': form})
-
-
-def not_logged_in(request):
-    return render(request, 'events/not_logged_in.html')
-

@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'events',  # nova aplikace
+    'events',
     'users',
+    'user_auth', 
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"
@@ -132,9 +133,10 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# settings.py
-LOGOUT_REDIRECT_URL = '/hello'  # Nastavte cestu, kam chcete uživatele přesměrovat po odhlášení
+# Login nastavení
 
+LOGOUT_REDIRECT_URL = ''  # Nastavte cestu, kam chcete uživatele přesměrovat po odhlášení
 
-# settings.py
-LOGIN_URL = '/not_logged_in'  # Nastavte cestu k vaší vlastní stránce pro nepřihlášené uživatele
+LOGIN_REDIRECT_URL = '/dashboard/'
+
+LOGIN_URL = '/login/'  # Nastavte cestu k vaší vlastní stránce pro nepřihlášené uživatele
