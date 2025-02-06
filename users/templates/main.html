@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{%endblock%}</title>
+
+</head>
+<body>
+    <!--vše zde si představuju v nějakým menu napravo nahoře, kde bude právě jen napsaný účet a když si to rozklikne, tak
+    uvidí vše co potřebuje (jméno, příjmení, blabla, to vymyslíš)-->
+    <p>Účet</p>
+    <p>{{ user.jmeno }} {{ user.prijmeni }}</p>
+    <p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Odhlásit</button>
+        </form>
+    </p>
+    {%block content%}
+    {%endblock%}
+</body>
+</html>

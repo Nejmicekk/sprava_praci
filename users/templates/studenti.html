@@ -1,0 +1,46 @@
+{% extends "main.html" %}
+
+{%block title%}
+Studenti
+{%endblock%}
+
+{%block content%}
+    {%if request.user.is_authenticated and request.user.role == "ucitel" or request.user.role == "admin"%}
+    <table>
+        <tr>
+            <th>
+                Jméno
+            </th>
+            <th>
+                Příjmení
+            </th>
+            <th>
+                Třída
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+    {%for user in users%}
+    {%if user.role == 'student'%}
+        <tr>
+            <td>
+                {{user.jmeno}}
+            </td>
+            <td>
+                {{user.prijmeni}}
+            </td>
+            <td>
+                {{user.trida}}
+            </td>
+            <td>
+                {{user.email}}
+            </td>
+        </tr>
+    {%endif%}
+    {%endfor%}
+    </table>
+    {%else%}
+        <h1>Nejste administrátor nebo učitel!</h1>
+        {%endif%}
+{%endblock%}

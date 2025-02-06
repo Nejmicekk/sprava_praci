@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seznam událostí</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <p>Přihlášen jako: {{ user.username }} |
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Odhlásit</button>
+        </form>
+    </p>
+{% else %}
+    <p><a href="{% url 'login' %}">Přihlásit</a> | <a href="{% url 'register' %}">Registrovat</a></p>
+{% endif %}
+    <h1>Seznam událostí</h1>
+    <ul>
+        {% for event in events %}
+            <li>
+                <strong>{{ event.title }}</strong> - {{ event.date }}<br>
+                {{ event.location }}<br>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'edit_event' event.id %}">✏️ Upravit</a>
+                    <a href="{% url 'delete_event' event.id %}" style="color: red;">🗑️ Smazat</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>Žádné události k dispozici.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

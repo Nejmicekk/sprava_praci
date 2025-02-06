@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Přidat událost</title>
+</head>
+<body>
+    <h1>Přidat novou událost</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Vykreslení formuláře -->
+        <button type="submit">Uložit</button>
+    </form>
+    <br>
+    <a href="{% url 'event_list' %}">Zpět na seznam</a>
+</body>
+</html>

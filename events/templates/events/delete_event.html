@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smazat událost</title>
+</head>
+<body>
+    <h1>Smazat událost: {{ event.title }}</h1>
+    <p>Opravdu chceš smazat tuto událost?</p>
+    <form method="post">
+        {% csrf_token %}
+      <button type="submit" style="color: red;">🗑️ Ano, smazat</button>
+    </form>
+    <br>
+    <a href="{% url 'event_list' %}">Zpět na seznam</a>
+</body>
+</html>
