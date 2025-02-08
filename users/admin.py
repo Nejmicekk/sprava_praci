@@ -1,4 +1,3 @@
-# accounts/admin.py
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
@@ -10,8 +9,10 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
 
-    list_display = ("username", "jmeno", "prijmeni", "email", "role", "trida", "is_staff", "is_active")  # Zobrazení uživatelů v adminu
+    # Zobrazení atributů/sloupců v adminu
+    list_display = ("username", "jmeno", "prijmeni", "email", "role", "trida", "is_staff", "is_active")
 
+    # Co se zobrazuje když budeme editovat práci v adminu
     fieldsets = (
         (None, {"fields": ("username", "password", "email")}),
         ("Personal info", {"fields": ("jmeno", "prijmeni", "trida")}),
@@ -19,7 +20,8 @@ class CustomUserAdmin(UserAdmin):
         ("Important dates", {"fields": ("last_login", "date_joined")}),
     )
 
-    add_fieldsets = (  # Nastavuje pole při vytváření nového uživatele
+    # Jaké atributy se zobrazí při vytváření nového uživatele
+    add_fieldsets = (
         (None, {
             "classes": ("wide",),
             "fields": ("jmeno", "prijmeni", "trida", "role", "password1", "password2", "is_staff", "is_active"),
