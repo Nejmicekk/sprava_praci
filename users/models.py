@@ -11,12 +11,6 @@ class CustomUser(AbstractUser):
     id = models.AutoField(primary_key=True)
     jmeno = models.CharField(max_length=100, blank=False)
     prijmeni = models.CharField(max_length=100, blank=False)
-
-    email = models.CharField(
-        max_length=100,
-        unique = True,
-        validators = [RegexValidator(regex=r'^[a-zA-Z0-9._%+-]+@purkynka\.cz$', message="Použíjte školní email")]
-        )
     
     trida = models.CharField(max_length=3)
 
@@ -46,7 +40,9 @@ class CustomUser(AbstractUser):
         if self.jmeno and self.prijmeni:
             jmeno = unidecode.unidecode(self.jmeno.lower().strip())
             prijmeni = unidecode.unidecode(self.prijmeni.lower().strip())
-            self.username= f"{prijmeni}.{jmeno}"
+
+            self.username = f"{prijmeni}.{jmeno}"
+            self.email = f"{prijmeni}.{jmeno}@purkynka.cz"
         super().save(*args, **kwargs)
 
     pass

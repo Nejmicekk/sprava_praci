@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
 
-    list_display = ("username", "jmeno", "prijmeni", "role", "trida", "email", "is_staff", "is_active")  # Zobrazení uživatelů v adminu
+    list_display = ("username", "jmeno", "prijmeni", "email", "role", "trida", "is_staff", "is_active")  # Zobrazení uživatelů v adminu
 
     fieldsets = (
         (None, {"fields": ("username", "password", "email")}),
@@ -22,7 +22,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (  # Nastavuje pole při vytváření nového uživatele
         (None, {
             "classes": ("wide",),
-            "fields": ("jmeno", "prijmeni", "email", "trida", "role", "password1", "password2", "is_staff", "is_active"),
+            "fields": ("jmeno", "prijmeni", "trida", "role", "password1", "password2", "is_staff", "is_active"),
         }),
     )
     

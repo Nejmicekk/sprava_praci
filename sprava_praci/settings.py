@@ -137,6 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = ''  # Nastavte cestu, kam chcete uživatele přesměrovat po odhlášení
 
-LOGIN_REDIRECT_URL = '/dashboard/'
+LOGIN_REDIRECT_URL = '/'
 
 LOGIN_URL = '/login/'  # Nastavte cestu k vaší vlastní stránce pro nepřihlášené uživatele
