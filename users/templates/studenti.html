@@ -4,9 +4,9 @@
 Studenti
 {%endblock%}
 
-{% block styles %}
 {%load static%}
-    <link rel="stylesheet" href="{% static 'styles/users.css' %}">
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/uzivatele.css' %}">
 {% endblock %}
 
 {%block content%}
@@ -25,6 +25,12 @@ Studenti
             <th>
                 Email
             </th>
+            <th>
+                Návrhy prací
+            </th>
+            <th>
+                Zpracovává
+            </th>
         </tr>
     {%for user in users%}
     {%if user.role == 'student'%}
@@ -40,6 +46,32 @@ Studenti
             </td>
             <td>
                 {{user.email}}
+            </td>
+            <td>
+                <ul>
+                    {%for prace in user.navrzene_prace.all%}
+                    <li>
+                        {{prace.nazev}}
+                    </li>
+                    {% empty %}
+                        <li class="null">
+                            null
+                        </li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {%if user.zpracovana_prace%}
+                    <li>
+                        {{user.zpracovana_prace.nazev}}
+                    </li>
+                    {%else%}
+                        <li class="null">
+                            null
+                        </li>
+                    {% endif %}
+                </ul>
             </td>
         </tr>
     {%endif%}
