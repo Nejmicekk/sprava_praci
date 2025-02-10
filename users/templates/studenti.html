@@ -6,7 +6,7 @@ Studenti
 
 {%load static%}
 {% block styles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/uzivatele.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/users.css' %}">
 {% endblock %}
 
 {%block content%}
@@ -56,7 +56,7 @@ Studenti
             <td>
                 <div class="list-group">
                     {%for prace in user.navrzene_prace.all%}
-                    <a href="#" class="list-group-item">
+                    <a href="{% url 'work_detail' prace.id %}" class="list-group-item">
                         {{prace.nazev}}
                     </a>
                     {% empty %}

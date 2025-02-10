@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import WorkDetailView
+from .views import work_detail
 
 urlpatterns = [
-    path('prace/<int:pk>', WorkDetailView.as_view(), name='work_detail')
+    path('prace/<int:pk>', work_detail, name='work_detail')
 ]

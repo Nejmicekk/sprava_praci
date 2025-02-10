@@ -12,3 +12,7 @@ li {
 .null {
     color: gray;
 }
+
+.list-group {
+    margin-bottom: 0 !important;
+}
