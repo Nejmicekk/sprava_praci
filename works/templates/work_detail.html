@@ -6,7 +6,7 @@
     <h1>{{ work.nazev }}</h1>
     <p>{{ work.popis }}</p>
     <p><strong>Navrhl: </strong> {{work.navrhovatel.jmeno }} {{work.navrhovatel.prijmeni }}</p>
-    <p><strong>Schváleno: </strong> {{work.schvaleno_text}}
+    <p><strong>Schváleno: </strong> {{work.schvaleno_emoji}}
     {%if work.schvaleno%}
     <p><strong>Schválil: </strong>{{work.schvalovatel}}</p> 
     <p><strong>Zpracovává: </strong> 

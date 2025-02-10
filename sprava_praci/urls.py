@@ -7,4 +7,5 @@ urlpatterns = [
     path('uzivatele/', include('users.urls')),
     path('login/', include('user_auth.urls')),
     path('prace/', include('works.urls')),
+    path('emoji/', include('emoji.urls')),
 ]

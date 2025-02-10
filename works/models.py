@@ -34,5 +34,6 @@ class Work(models.Model):
     def __str__(self):
         return self.nazev
     
-    def schvaleno_text(self):
-        return "Ano" if self.schvaleno else "Ne"
+    def schvaleno_emoji(self):
+        return "✅" if self.schvaleno else "❌"
+        

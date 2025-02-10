@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'user_auth', 
     'works',
+    'emoji',
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"
