@@ -11,8 +11,11 @@ Studenti
 
 {%block content%}
     {%if request.user.role == "ucitel" or request.user.role == "admin"%}
-    <table>
+    <table class="table">
         <tr>
+            <th>
+                #
+            </th>
             <th>
                 Jméno
             </th>
@@ -36,6 +39,9 @@ Studenti
     {%if user.role == 'student'%}
         <tr>
             <td>
+                {{forloop.counter}}
+            </td>
+            <td>
                 {{user.jmeno}}
             </td>
             <td>
@@ -48,13 +54,13 @@ Studenti
                 {{user.email}}
             </td>
             <td>
-                <ul>
+                <div class="list-group">
                     {%for prace in user.navrzene_prace.all%}
-                    <li>
+                    <a href="#" class="list-group-item">
                         {{prace.nazev}}
-                    </li>
+                    </a>
                     {% empty %}
-                        <li class="null">
+                        <li class="null" class="list-group-item">
                             null
                         </li>
                     {% endfor %}

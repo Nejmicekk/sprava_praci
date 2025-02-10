@@ -6,13 +6,19 @@ Uživatelé
 
 {% block styles %}
 {%load static%}
-    <link rel="stylesheet" href="{% static 'styles/users.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/uzivatele.css' %}">
 {% endblock %}
 
 {%block content%}
     {%if request.user.role == "admin"%}
-        <table>
+    <!--tahle classka table dělá automatický css styl, je to z knihovny bootstrap
+    https://www.w3schools.com/bootstrap/bootstrap_tables.asp
+    Příjde mi to super na stylování a vlastně nic moc neřešíš a dělá to věci za tebe.-->
+        <table class="table">
             <tr>
+                <th>
+                    #
+                </th>
                 <th>
                     Jméno
                 </th>
@@ -28,6 +34,9 @@ Uživatelé
             </tr>
         {%for user in users%}
             <tr>
+                <td>
+                    {{forloop.counter}}
+                </td>
                 <td>
                     {{user.jmeno}}
                 </td>
