@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group
 from django.utils.translation import gettext_lazy as _
-from django.core.validators import RegexValidator
 import unidecode
+from django.core.exceptions import ValidationError
 
 class CustomUser(AbstractUser):
     first_name = None
@@ -11,8 +11,6 @@ class CustomUser(AbstractUser):
     id = models.AutoField(primary_key=True)
     jmeno = models.CharField(max_length=100, blank=False)
     prijmeni = models.CharField(max_length=100, blank=False)
-    
-    trida = models.CharField(max_length=3)
 
     class Types(models.TextChoices):
         student = "student", "Student"
@@ -24,6 +22,13 @@ class CustomUser(AbstractUser):
         choices=Types.choices,
         default=Types.student
     )
+
+    trida = models.CharField(max_length=3, blank=True, null=True)
+
+    def clean(self):
+        if self.role != "student" and self.trida:
+            raise ValidationError("Pouze studenti mohou mít přiřazenou třídu.")
+        super().clean()
 
     class Genders(models.TextChoices):
         male = "muz", "Žena"

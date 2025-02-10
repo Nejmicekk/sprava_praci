@@ -10,7 +10,8 @@ class Work(models.Model):
     navrhovatel  = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
-        related_name="navrzene_prace")
+        related_name="navrzene_prace"
+    )
     
     zpracovatel = models.OneToOneField(
         CustomUser,
@@ -21,5 +22,17 @@ class Work(models.Model):
         limit_choices_to={"role" : "student"}
     )
 
+    schvalovatel  = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name="schvalene_prace",
+        null=True,
+        blank=True,
+        limit_choices_to={"role" : "ucitel"}
+    )
+
     def __str__(self):
         return self.nazev
+    
+    def schvaleno_text(self):
+        return "Ano" if self.schvaleno else "Ne"

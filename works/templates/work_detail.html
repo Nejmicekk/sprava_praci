@@ -4,13 +4,17 @@
 
 {% block content %}
     <h1>{{ work.nazev }}</h1>
-    <p><strong>Navrhl:</strong> {{ work.navrhovatel.jmeno }} {{ work.navrhovatel.prijmeni }}</p>
-    <p><strong>Popis:</strong> {{ work.popis }}</p>
-    <p><strong>Zpracovává:</strong> 
+    <p>{{ work.popis }}</p>
+    <p><strong>Navrhl: </strong> {{work.navrhovatel.jmeno }} {{work.navrhovatel.prijmeni }}</p>
+    <p><strong>Schváleno: </strong> {{work.schvaleno_text}}
+    {%if work.schvaleno%}
+    <p><strong>Schválil: </strong>{{work.schvalovatel}}</p> 
+    <p><strong>Zpracovává: </strong> 
         {% if work.zpracovatel %}
-            {{ work.zpracovatel.jmeno }} {{ work.zpracovatel.prijmeni }}
+            {{work.zpracovatel.jmeno }} {{work.zpracovatel.prijmeni }}
         {% else %}
-            Zatím nikdo
+            null
         {% endif %}
+    {%endif%}
     </p>
 {% endblock %}
