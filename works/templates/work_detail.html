@@ -3,6 +3,8 @@
 {% block title %}{{ work.nazev }}{% endblock %}
 
 {% block content %}
+<!--Zajištění, aby se na stránku dostal jen učitel, který tu zprávu "spravuje" nebo žák, který ji vypracovává.-->
+{%if request.user.id == work.zpracovatel.id or request.user.id == work.schvalovatel.id%}    
     <h1>{{ work.nazev }}</h1>
     <p>{{ work.popis }}</p>
     <p><strong>Navrhl: </strong> {{work.navrhovatel.jmeno }} {{work.navrhovatel.prijmeni }}</p>
@@ -17,4 +19,5 @@
         {% endif %}
     {%endif%}
     </p>
+{%endif%}
 {% endblock %}
