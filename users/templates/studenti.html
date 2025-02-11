@@ -55,10 +55,16 @@ Studenti
             </td>
             <td>
                 <div class="list-group">
-                    {%for prace in user.navrzene_prace.all%}
-                    <a href="{% url 'work_detail' prace.id %}" class="list-group-item">
-                        {{prace.nazev}}
+                    {% for prace in user.navrzene_prace.all %}
+                    <a href="#collapse{{ prace.id }}" class="list-group-item" data-bs-toggle="collapse">
+                        {{ prace.nazev }}
                     </a>
+                    <div class="collapse" id="collapse{{ prace.id }}">
+                        <div class="card card-body">
+                            <strong>Popis:</strong> {{ prace.popis }} <br>
+                            <strong>Schváleno:</strong> {{ prace.schvaleno|yesno:"Ano,Ne" }}
+                        </div>
+                    </div>
                     {% empty %}
                         <li class="null" class="list-group-item">
                             null
