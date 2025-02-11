@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .models import CustomUser
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="/login/")

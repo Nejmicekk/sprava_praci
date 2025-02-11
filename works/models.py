@@ -31,6 +31,11 @@ class Work(models.Model):
         limit_choices_to={"role" : "ucitel"}
     )
 
+    def save(self, *args, **kwargs):
+        if self.schvaleno and not self.zpracovatel:
+            self.zpracovatel = self.navrhovatel
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.nazev
     

@@ -16,3 +16,8 @@ li {
 .list-group {
     margin-bottom: 0 !important;
 }
+
+.list-group-item {
+    margin-bottom: 2% !important;
+    padding: 5px;
+}

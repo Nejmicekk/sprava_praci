@@ -6,7 +6,7 @@ Studenti
 
 {%load static%}
 {% block styles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/users.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/users-studenti.css' %}">
 {% endblock %}
 
 {%block content%}
@@ -57,12 +57,34 @@ Studenti
                 <div class="list-group">
                     {% for prace in user.navrzene_prace.all %}
                     <a href="#collapse{{ prace.id }}" class="list-group-item" data-bs-toggle="collapse">
-                        {{ prace.nazev }}
+                        {{prace.nazev}}
                     </a>
                     <div class="collapse" id="collapse{{ prace.id }}">
                         <div class="card card-body">
                             <strong>Popis:</strong> {{ prace.popis }} <br>
-                            <strong>Schváleno:</strong> {{ prace.schvaleno|yesno:"Ano,Ne" }}
+                            <strong>Schváleno:</strong> {{prace.schvaleno_emoji}}
+                            {%if prace.schvaleno%}
+                            {{prace.schvalovatel.jmeno}} {{prace.schvalovatel.prijmeni}}
+                            <!--Detail vidí pouze učitel který je přihlášenej u tohodle, je to taková maličkost ale reálně
+                            ten učitel tam takhle chodit nebude a radši pujde třeba přes ten hlavní dashboard nebo tak.-->
+                            {%if prace.schvalovatel.jmeno == request.user.jmeno%}
+                            <a href="{% url 'work_detail' pk=prace.pk %}">DETAIL</a>
+                            {%endif%}
+                            {%else%}
+                            <!--Div jsem si jen přidal, abych tam mohl dat classku d-flex gap-2 z bootstrap knihovny, aby ty tlačítka
+                            byly vedle sebe, ale je to na tobě.-->
+                            <div class="d-flex gap-2" style="margin-top: 2%;">
+                                <form method="post" action="{% url 'schvalit_praci' pk=prace.pk %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success">Schválit</button>
+                                </form>
+
+                                <form method="post" action="{% url 'zamitnout_praci' pk=prace.pk %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Zamítnout</button>
+                                </form>
+                            </div>
+                            {%endif%}
                         </div>
                     </div>
                     {% empty %}
