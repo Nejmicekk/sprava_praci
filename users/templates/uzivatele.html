@@ -6,7 +6,7 @@ Uživatelé
 
 {% block styles %}
 {%load static%}
-    <link rel="stylesheet" href="{% static 'styles/uzivatele.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/users.css' %}">
 {% endblock %}
 
 {%block content%}
@@ -24,13 +24,13 @@ Uživatelé
     </div>
     {% endif %}
     <form method="GET" action="{% url 'uzivatele' %}" class="search-form">
-        <input type="text" name="q" value="{{ query }}" placeholder="Hledat uživatele..." class="search-input">
+        <input type="text" name="q" value="{{ query }}" placeholder="Hledat..." class="search-input">
         <button type="submit" class="btn btn-primary">🔍 Hledat</button>
     </form>
         <table class="table">
             <tr>
                 <th>
-                    #
+                    #   
                 </th>
                 <th>
                     Jméno

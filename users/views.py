@@ -1,12 +1,21 @@
 from django.shortcuts import render, redirect
 from .models import CustomUser
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from works.models import Work
 
 @login_required(login_url="/login/")
 def students_list(request):
-    users = CustomUser.objects.all()[1:]
-    #jednicka zajistuje, aby se nevypsala prvni prazdna
-    return render(request, 'studenti.html', {'users': users})
+    query = request.GET.get("q", "")
+    if query:
+        users = CustomUser.objects.filter(
+            Q(role="student") &  # Filtrovat jen studenty
+            (Q(jmeno__icontains=query) | Q(prijmeni__icontains=query) | Q(navrzene_prace__nazev__icontains=query) | Q(zpracovana_prace__nazev__icontains=query))
+            ).distinct()
+    else:
+        users = CustomUser.objects.filter(role="student")[1:]
+
+    return render(request, "studenti.html", {"users": users, "query": query})
 
 @login_required(login_url="/login/")
 def users_list(request):

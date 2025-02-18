@@ -6,11 +6,15 @@ Studenti
 
 {%load static%}
 {% block styles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/users-studenti.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/users.css' %}">
 {% endblock %}
 
 {%block content%}
     {%if request.user.role == "ucitel" or request.user.role == "admin"%}
+    <form method="GET" action="{% url 'studenti' %}" class="search-form">
+        <input type="text" name="q" value="{{ query }}" placeholder="Hledat..." class="search-input">
+        <button type="submit" class="btn btn-primary">🔍 Hledat</button>
+    </form>
     <table class="table">
         <tr>
             <th>
@@ -36,7 +40,6 @@ Studenti
             </th>
         </tr>
     {%for user in users%}
-    {%if user.role == 'student'%}
         <tr>
             <td>
                 {{forloop.counter}}
@@ -108,7 +111,6 @@ Studenti
                 </ul>
             </td>
         </tr>
-    {%endif%}
     {%endfor%}
     </table>
     {%else%}
